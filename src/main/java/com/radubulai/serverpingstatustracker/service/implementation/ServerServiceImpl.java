@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class ServerServiceImpl implements ServerServiceI {
                         server.getNetwork(),
                         server.getDetails(),
                         server.getStatus()))
-                .toList();
+                .collect(Collectors.toList());
         log.info("Saving Servers {}", serversWithoutId);
         serverRepository.saveAll(serversWithoutId);
         return serversWithoutId;
